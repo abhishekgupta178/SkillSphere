@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSphere</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header id="appHeader" class="navbar hidden">
+    <div class="brand">Skill<span>Sphere</span></div>
+    <nav>
+        <a href="#dashboard" data-view="dashboard">Dashboard</a>
+        <a href="#profile" data-view="profile">My Profile</a>
+        <a href="#skills" data-view="skills">My Skills</a>
+        <a href="#projects" data-view="projects">My Projects</a>
+        <a href="#find-students" data-view="find-students">Find Students</a>
+    </nav>
+    <button id="logoutBtn" class="outline-btn">Logout</button>
+</header>
+
+<main>
+    <section id="authArea">
+        <!-- Login screen -->
+        <section id="login" class="auth-card">
+            <div class="auth-brand">Skill<span>Sphere</span></div>
+            <h1>Welcome to SkillSphere</h1>
+            <p class="auth-subtitle">Student skills and project management portal</p>
+
+            <form id="loginForm" class="auth-form">
+                <h2>Login</h2>
+                <label for="loginEmail">Email</label>
+                <input id="loginEmail" type="email" placeholder="Enter your email" required>
+                <label for="loginPassword">Password</label>
+                <input id="loginPassword" type="password" placeholder="Enter your password" required>
+                <button type="submit" class="primary-btn">Login</button>
+            </form>
+
+            <div class="auth-switch">
+                <span>New to SkillSphere?</span>
+                <button id="showRegisterBtn" type="button" class="link-btn">Create Account</button>
+            </div>
+            <p id="authMessage" class="message"></p>
+        </section>
+
+        <!-- Registration screen -->
+        <section id="register" class="auth-card hidden">
+            <div class="auth-brand">Skill<span>Sphere</span></div>
+            <h1>Create Your Account</h1>
+            <p class="auth-subtitle">Create your student profile to get started</p>
+
+            <form id="registerForm" class="auth-form">
+                <h2>Register</h2>
+                <label for="regName">Full Name</label>
+                <input id="regName" type="text" placeholder="Enter your full name" required>
+                <label for="regEmail">Email</label>
+                <input id="regEmail" type="email" placeholder="Enter your email" required>
+                <label for="regPassword">Password</label>
+                <input id="regPassword" type="password" placeholder="Create a password" minlength="4" required>
+                <label for="regConfirmPassword">Confirm Password</label>
+                <input id="regConfirmPassword" type="password" placeholder="Re-enter your password" minlength="4" required>
+                <button type="submit" class="primary-btn">Create Account</button>
+            </form>
+
+            <div class="auth-switch">
+                <span>Already have an account?</span>
+                <button id="backToLoginBtn" type="button" class="link-btn">Back to Login</button>
+            </div>
+            <p id="registerMessage" class="message"></p>
+        </section>
+    </section>
+
+    <section id="app" class="hidden">
+        <div id="appMessage" class="message"></div>
+
+        <!-- Dashboard -->
+        <section id="view-dashboard" class="view">
+            <section class="hero">
+                <div>
+                    <p class="eyebrow">STUDENT PORTAL</p>
+                    <h1>Welcome, <span id="dashboardName">Student</span>.</h1>
+                    <p>Manage your academic profile, skills and projects — and discover students with the skills you need.</p>
+                    <button class="primary-btn" data-view="profile">Complete Profile</button>
+                </div>
+            </section>
+
+            <section class="stats-grid">
+                <div class="stat-card"><strong id="studentCount">0</strong><span>Students</span></div>
+                <div class="stat-card"><strong id="skillCount">0</strong><span>Skills in Portal</span></div>
+                <div class="stat-card"><strong id="projectCount">0</strong><span>Projects in Portal</span></div>
+                <div class="stat-card"><strong id="mySkillCount">0</strong><span>My Skills</span></div>
+            </section>
+
+            <section class="dashboard-grid">
+                <div class="panel quick-panel">
+                    <h2>Quick Actions</h2>
+                    <button class="quick-btn" data-view="skills">＋ Add / Manage Skills</button>
+                    <button class="quick-btn" data-view="projects">＋ Add / Manage Projects</button>
+                    <button class="quick-btn" data-view="find-students">⌕ Find Students by Skill</button>
+                </div>
+                <div class="panel">
+                    <h2>How SkillSphere works</h2>
+                    <div class="flow"><span>Profile</span><b>→</b><span>Skills</span><b>→</b><span>Projects</span><b>→</b><span>Find Students</span></div>
+                    <p class="muted">Your data is stored in MySQL through the Java Spring Boot REST API.</p>
+                </div>
+            </section>
+        </section>
+
+        <!-- Profile -->
+        <section id="view-profile" class="view hidden">
+            <div class="page-heading">
+                <div><p class="eyebrow">MY PROFILE</p><h1>Student Profile</h1><p>Keep your basic student information up to date.</p></div>
+            </div>
+            <section class="panel profile-panel">
+                <form id="studentForm" class="profile-form">
+                    <input type="hidden" id="studentId">
+                    <div class="field"><label for="studentName">Full Name</label><input id="studentName" placeholder="Full name" required></div>
+                    <div class="field"><label for="studentContact">Contact</label><input id="studentContact" placeholder="Phone number"></div>
+                    <div class="field full"><label for="studentBio">Bio</label><textarea id="studentBio" placeholder="Tell other students about yourself"></textarea></div>
+                    <button type="submit" class="primary-btn">Save Profile</button>
+                </form>
+            </section>
+        </section>
+
+        <!-- My Skills -->
+        <section id="view-skills" class="view hidden">
+            <div class="page-heading"><div><p class="eyebrow">MY SKILLS</p><h1>Skills</h1><p>Add the skills you know and select your current level.</p></div></div>
+            <section class="panel">
+                <form id="skillForm" class="form-grid">
+                    <select id="skillSelect"><option value="">Select existing skill</option></select>
+                    <input id="skillName" placeholder="Or enter a new skill" required>
+                    <input id="skillCategory" placeholder="Category (e.g. Programming)">
+                    <select id="skillLevel" required>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate" selected>Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
+                    <button type="submit" class="primary-btn">Save Skill</button>
+                </form>
+            </section>
+            <section class="panel">
+                <div class="section-head"><h2>My Skills</h2><input id="mySkillSearch" placeholder="Search my skills..."></div>
+                <div id="mySkillList" class="card-grid"></div>
+            </section>
+        </section>
+
+        <!-- My Projects -->
+        <section id="view-projects" class="view hidden">
+            <div class="page-heading"><div><p class="eyebrow">MY PROJECTS</p><h1>Projects</h1><p>Add projects to showcase your work and portfolio.</p></div></div>
+            <section class="panel">
+                <form id="projectForm" class="form-grid">
+                    <input id="projectTitle" placeholder="Project title" required>
+                    <input id="projectDescription" placeholder="Description">
+                    <input id="projectGithub" placeholder="GitHub URL">
+                    <button type="submit" class="primary-btn">Add Project</button>
+                </form>
+            </section>
+            <section class="panel">
+                <div class="section-head"><h2>My Projects</h2><input id="projectSearch" placeholder="Search my projects..."></div>
+                <div id="projectList" class="card-grid"></div>
+            </section>
+        </section>
+
+        <!-- Find Students -->
+        <section id="view-find-students" class="view hidden">
+            <div class="page-heading"><div><p class="eyebrow">DISCOVER</p><h1>Find Students</h1><p>Search for students who have a particular skill.</p></div></div>
+            <section class="search-panel">
+                <div class="search-icon">⌕</div>
+                <div class="search-copy"><h2>Search by Skill</h2><p>For example: Java, Python, MySQL, HTML or C++.</p></div>
+                <input id="studentSkillSearch" type="search" placeholder="Enter a skill...">
+                <button id="studentSkillSearchBtn" class="primary-btn">Search Students</button>
+            </section>
+            <div id="searchSummary" class="search-summary"></div>
+            <section id="studentSearchResults" class="student-results"></section>
+        </section>
+    </section>
+</main>
+
+<footer>SkillSphere • HTML + CSS + JavaScript + Java Spring Boot + MySQL</footer>
+<script src="js/app.js"></script>
+</body>
+</html>

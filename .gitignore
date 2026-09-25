@@ -1,0 +1,9 @@
+target/
+*.class
+.idea/
+.vscode/
+*.iml
+node_modules/
+.DS_Store
+
+backend/src/main/resources/application-local.properties
