@@ -1,4 +1,4 @@
-const API = "http://skillsphere-production-2f02.up.railway.app/api";
+const API = "https://skillsphere-production-2f02.up.railway.app/api";
 let currentUser = null;
 let currentStudent = null;
 let allPortalSkills = [];
